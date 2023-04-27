@@ -8,14 +8,14 @@ public class MinimumSpanningTree {
 	private List<Edge> minimumSpanningTree;
 
 	// constructor
-	public MinimumSpanningTree(WeightedBidirectionalGraph graph) {
+	public MinimumSpanningTree(WeightedBidirectionalGraph graph, String startingVertex) {
 		this.graph = graph;
 		minimumSpanningTree = new ArrayList<>();
-		computeMinimumSpanningTree();
+		computeMinimumSpanningTree(startingVertex);
 	}
 
 	// private helper method to compute the minimum spanning tree
-	private void computeMinimumSpanningTree() {
+	private void computeMinimumSpanningTree(String startingVertex) {
 		// create a priority queue to store the edges of the graph, ordered by weight
 		PriorityQueue<Edge> edgeQueue = new PriorityQueue<>(graph.getNumEdges());
 
@@ -26,12 +26,11 @@ public class MinimumSpanningTree {
 			visited[i] = false;
 		}
 
-		// start with vertex "0"
-		visited[0] = true;
-		// add all edges connected to vertex "0" to the queue
-		List<String> neighbors = graph.getNeighbors("A");
+		visited[graph.getIndex(startingVertex)] = true;
+		// add all edges connected to Starting vertex to the queue
+		List<String> neighbors = graph.getNeighbors(startingVertex);
 		for (String neighbor : neighbors) {
-			edgeQueue.offer(new Edge("A", neighbor, graph.getWeight("A", neighbor)));
+			edgeQueue.offer(new Edge(startingVertex, neighbor, graph.getWeight(startingVertex, neighbor)));
 		}
 
 		// loop until all vertices have been visited
