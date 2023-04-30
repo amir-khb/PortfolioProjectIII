@@ -5,27 +5,18 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		TextReader t = new TextReader();
 		WeightedBidirectionalGraph graph = t.returnGraph();
-//		graph.addVertex("A");
-//		graph.addVertex("B");
-//		graph.addVertex("C");
-//		graph.addVertex("D");
-//
-//		graph.addEdge("A", "B", 2);
-//		graph.addEdge("B", "C", 1);
-//		graph.addEdge("C", "D", 3);
-//		graph.addEdge("D", "A", 4);
-//		graph.addEdge("A", "C", 5);
-//		graph.removeEdge("A", "C");
 
 		List<Edge> edges = graph.getEdgeList();
+
+		//Visualizing the graph
+		System.out.println("Visualizing the graph\n");
 		for (Edge edge : edges) {
 			System.out.println(edge.getSource() + " --(" + edge.getWeight() + ")-- " + edge.getDestination());
 		}
-//		graph.printGraph();
-		System.out.println(graph.isConnected());
-//		for (String s : graph.getNeighbors("C")) {
-//			System.out.println(s);
-//		}
+		System.out.println();
+
+		System.out.println("Is the graph connected: "+graph.isConnected()+"\n");
+
 		MinimumSpanningTree mst = new MinimumSpanningTree(graph, "Laem Chabang");
 
 		// print the edges of the minimum spanning tree and its total weight
